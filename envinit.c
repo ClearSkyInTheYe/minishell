@@ -40,7 +40,6 @@ void	add_list_env(t_env *e, t_env *new)
 	while (e->next)
 	{
 		e = e->next;
-//		printf("%s\n", e->en);
 	}
 	e->next = new;
 }
@@ -55,11 +54,9 @@ t_env	*init_env(t_data *d, t_env *e, char **env)
 	tmp = new_list(env[0], 0);
 	if (!tmp)
 		return (NULL);
-	while (i < env_len(env))
+	while (i < env_len(env) + 1)
 	{
 		add_list_env(tmp, new_list(env[i], i));
-//		printf("%s\n", e->next->en);не забыть норма защиту  малока листов
-		printf("%i\n", i);
 		i++;
 	}
 	return (tmp);
