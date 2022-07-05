@@ -61,10 +61,10 @@ int	main(int argc, char **argv, char **env)
 //		ft_parser(s, &d);
 //	}
 	e = init_env(&d, e, env);
-//	printf("%i\n", env_len(env));
-//	printf("q%s\n", env[1]);
-	printf("1%s\n", e->en);
-	printf("2%s\n", e->next->en);
-	printf("3%s\n", e->next->next->en);
+//	while (e->next)
+//	{
+//		printf("1%s\n", e->en);
+//		e = e->next;
+//	}
 	exit(3);
 }
