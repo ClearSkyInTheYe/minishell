@@ -30,36 +30,49 @@ void	ft_parser(char *s, t_data *d)
 {
 	char	*a;
 
-	if (ft_strcmp(s, "exit") == 0)
+	if (ft_strcmp(s, "exit\n") == 0)
 	{
 //		printf("asd");
 		d->ex = 2;
 	}
 }
 
-//t_data	*ft_init(t_data *d)
-//{
-//	d = malloc(sizeof (t_data));
-//	if (!d)
+void	sighand(int sig)
+{
+//	signal(SIGQUIT, SIG_IGN);
+	if (sig == SIGINT)
+	{
+		write(1, "\n", 1);
+		rl_replace_line("", 1);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+//	if (sig == SIG_DFL)
 //		exit(3);
-//	d->ex = 1;
-//	return (d);
-//}
+}
 
 int	main(int argc, char **argv, char **env)
 {
 	char	*s;
 	t_data	d;
 	t_env	*e;
+	char	*a;
 
 //	d = ft_init(d);
 	d.ex = 1;
-//	while (d.ex == 1)
-//	{
-//		s = readline(argv[1]);
-////		printf("%s\n", s);
-//		ft_parser(s, &d);
-//	}
+	signal(SIGINT, sighand);
+	while (1)
+	{
+		s = readline("$> ");
+//		printf("%s\n", s);
+//		if (open("stdin", 1) == -1)
+//			break ;
+		ft_parser(s, &d);
+//		if (d.ex != 2)
+//			signal(SIGQUIT, SIG_IGN);
+//		if (d.ex == 2)
+//			break ;
+	}
 	e = init_env(&d, e, env);
 //	while (e->next)
 //	{

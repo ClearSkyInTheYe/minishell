@@ -43,5 +43,7 @@ typedef struct s_data
 
 int		env_len(char **env);
 t_env	*init_env(t_data *d, t_env *e, char **env);
+void	rl_replace_line(const char *text, int clear_undo);
+void	sighand(int sig);
 
 #endif
