@@ -30,9 +30,10 @@ void	ft_parser(char *s, t_data *d)
 {
 	char	*a;
 
-	if (ft_strcmp(s, "exit\n") == 0)
+	if (!s)
+		exit(3);
+	if (ft_strcmp(s, "exit") == 0)
 	{
-//		printf("asd");
 		d->ex = 2;
 	}
 }
@@ -43,7 +44,7 @@ void	sighand(int sig)
 	if (sig == SIGINT)
 	{
 		write(1, "\n", 1);
-		rl_replace_line("", 1);
+		rl_replace_line(" ", 1);
 		rl_on_new_line();
 		rl_redisplay();
 	}
@@ -61,6 +62,8 @@ int	main(int argc, char **argv, char **env)
 //	d = ft_init(d);
 	d.ex = 1;
 	signal(SIGINT, sighand);
+//	signal(SIGQUIT, sighand);
+	e = init_env(&d, e, env);
 	while (1)
 	{
 		s = readline("$> ");
@@ -73,11 +76,10 @@ int	main(int argc, char **argv, char **env)
 //		if (d.ex == 2)
 //			break ;
 	}
-	e = init_env(&d, e, env);
+	printf("%i\n", d.ex);
 //	while (e->next)
 //	{
 //		printf("1%s\n", e->en);
 //		e = e->next;
 //	}
-	exit(3);
 }
