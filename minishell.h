@@ -41,6 +41,8 @@ typedef struct s_data
 	char	**env;
 }t_data;
 
+//char	g_mask[3] = "000";
+
 int		env_len(char **env);
 t_env	*init_env(t_data *d, t_env *e, char **env);
 void	rl_replace_line(const char *text, int clear_undo);
