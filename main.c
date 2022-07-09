@@ -42,11 +42,11 @@ void	ft_parser(char *s, t_data *d)
 
 void	sighand(int sig)
 {
-	signal(SIGQUIT, SIG_IGN);
 	if (sig == SIGINT)
 	{
+		signal(SIGQUIT, SIG_IGN);
 		write(1, "\n", 1);
-		rl_replace_line(" ", 1);
+		rl_replace_line("", 1);
 		rl_on_new_line();
 		rl_redisplay();
 	}
@@ -61,8 +61,8 @@ int	main(int argc, char **argv, char **env)
 
 	d.ex = 1;
 	signal(SIGINT, sighand);
-	signal(SIGQUIT, sighand);
-	signal(SIGQUIT, sighand);
+	(void )argc;
+	(void )argv;
 	e = init_env(&d, e, env);
 	while (1)
 	{
