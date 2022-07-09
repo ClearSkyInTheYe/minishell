@@ -44,7 +44,6 @@ void	sighand(int sig)
 {
 	if (sig == SIGINT)
 	{
-		signal(SIGQUIT, SIG_IGN);
 		write(1, "\n", 1);
 		rl_replace_line("", 1);
 		rl_on_new_line();
@@ -57,16 +56,21 @@ int	main(int argc, char **argv, char **env)
 	char	*s;
 	t_data	d;
 	t_env	*e;
-	char	*a;
+	extern int	rl_catch_signals;
 
 	d.ex = 1;
-	signal(SIGINT, sighand);
 	(void )argc;
 	(void )argv;
 	e = init_env(&d, e, env);
 	while (1)
 	{
+		rl_catch_signals = 0;
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, sighand);
 		s = readline("$> ");
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+		rl_catch_signals = 1;
 		if (!s)
 			break ;
 		ft_parser(s, &d);
