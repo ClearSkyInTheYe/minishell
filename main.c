@@ -19,7 +19,7 @@ int	ft_strcmp(char *s1, char *s2)
 	int	i;
 
 	i = 0;
-	while (s1[i])
+	while (s1[i] && s2[i])
 	{
 		if (s1[i] != s2[i])
 			return (1);
@@ -53,15 +53,14 @@ void	sighand(int sig)
 
 int	main(int argc, char **argv, char **env)
 {
-	char	*s;
-	t_data	d;
-	t_env	*e;
+	char		*s;
+	t_data		d;
+	t_env		*e;
 	extern int	rl_catch_signals;
 
-	d.ex = 1;
 	(void )argc;
 	(void )argv;
-	e = init_env(&d, e, env);
+	d.env1 = init_env(&d, e, env);
 	while (1)
 	{
 		rl_catch_signals = 0;
@@ -70,6 +69,7 @@ int	main(int argc, char **argv, char **env)
 		s = readline("$> ");
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
+		add_history(s);
 		rl_catch_signals = 1;
 		if (!s)
 			break ;
@@ -79,4 +79,5 @@ int	main(int argc, char **argv, char **env)
 			break ;
 	}
 	exit(3);
+//	rl_clear_history(s);
 }
