@@ -6,18 +6,20 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+
 typedef struct s_cmd
 {
     char *paths;
     char **cmd_paths;
     int p;
-    char    *cmd;
+    char    *str;
     // int fd[2];
 } t_cmd;
 
 //cmd.c
 char	*find_path(char **envp);
 char *get_cmd(char **paths, char *cmd);
+t_cmd *init_cmd(char **envp);
 
 //libft/
 size_t	ft_count_words(char const *s, char c);

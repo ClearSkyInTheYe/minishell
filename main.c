@@ -6,7 +6,7 @@
 /*   By: slaree <slaree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 23:38:16 by chfederi          #+#    #+#             */
-/*   Updated: 2022/07/11 21:28:20 by slaree           ###   ########.fr       */
+/*   Updated: 2022/07/11 22:14:31 by slaree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,18 @@ void	sighand(int sig)
 	}
 }
 
-int	main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **envp)
 {
 	char		*s;
 	t_data		d;
 	t_env		*e;
 	extern int	rl_catch_signals;
+	t_cmd *cmd; //добавила структуру, где будут лежать пути к исполняемым файлам команд
 
 	(void )argc;
 	(void )argv;
-	d.env1 = init_env(&d, e, env);
+	d.env1 = init_env(&d, e, envp);
+	cmd = init_cmd(envp);//добавила инит структуры
 	while (1)
 	{
 		rl_catch_signals = 0;
@@ -72,6 +74,8 @@ int	main(int argc, char **argv, char **env)
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		add_history(s);
+		cmd->str = s; /* записываю строку из stdin целиком в структуру, 
+						наверное ее и будем парсить */
 		rl_catch_signals = 1;
 		if (!s)
 			break ;

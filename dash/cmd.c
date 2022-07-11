@@ -32,16 +32,18 @@ char *get_cmd(char **paths, char *cmd)
     return (NULL);
 }
 
-// int	main(int argc, char **argv, char **envp)
-// {
-//     t_cmd *cmd;
+t_cmd *init_cmd(char **envp)
+{
+    t_cmd *cmd;
 
-//     cmd = malloc(sizeof(t_cmd));
-//     cmd->paths = find_path(envp);
-//     cmd->p = ft_count_words(cmd->paths, ':');
-//     cmd->cmd_paths = ft_split(cmd->paths, ':');
-//     // cmd->cmd = get_cmd(cmd->cmd_paths, )
-//     // int i = -1;
-//     // while (++i < cmd->p)
-//     //     printf("%s\n", cmd->cmd_paths[i]);
-// }
+    cmd = malloc(sizeof(t_cmd));
+    cmd->paths = find_path(envp);
+    cmd->p = ft_count_words(cmd->paths, ':'); //cmd->p - это количество путей в path
+    cmd->cmd_paths = ft_split(cmd->paths, ':'); //free
+    // cmd->str = str; //запишем строку как есть в структуру для начала 
+
+    // int i = -1;
+    // while (++i < cmd->p)
+    //     printf("%s\n", cmd->cmd_paths[i]);
+    return (cmd);
+}
