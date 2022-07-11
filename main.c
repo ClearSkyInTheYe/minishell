@@ -38,6 +38,8 @@ void	ft_parser(char *s, t_data *d)
 	{
 		d->ex = 2;
 	}
+	if (ft_strcmp(s, "pwd\n") == 0)
+		pwd();
 }
 
 void	sighand(int sig)

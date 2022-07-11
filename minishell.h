@@ -24,6 +24,8 @@
 # include <sys/wait.h>
 # include <sys/time.h>
 # include <sys/stat.h>
+//# include <dir.h>
+# include <stdint.h>
 
 typedef struct t_env
 {
@@ -47,5 +49,6 @@ int		env_len(char **env);
 t_env	*init_env(t_data *d, t_env *e, char **env);
 void	rl_replace_line(const char *text, int clear_undo);
 void	sighand(int sig);
+void	pwd(void);
 
 #endif
