@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chfederi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: slaree <slaree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 23:38:16 by chfederi          #+#    #+#             */
-/*   Updated: 2022/06/28 23:38:18 by chfederi         ###   ########.fr       */
+/*   Updated: 2022/07/11 21:28:20 by slaree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	ft_parser(char *s, t_data *d)
 	{
 		d->ex = 2;
 	}
-	if (ft_strcmp(s, "pwd\n") == 0)
-		pwd();
+	// if (ft_strcmp(s, "pwd\n") == 0)
+	// 	pwd();
 }
 
 void	sighand(int sig)

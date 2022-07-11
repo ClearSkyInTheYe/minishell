@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chfederi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: slaree <slaree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 23:29:09 by chfederi          #+#    #+#             */
-/*   Updated: 2022/06/28 23:29:13 by chfederi         ###   ########.fr       */
+/*   Updated: 2022/07/11 21:22:52 by slaree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # include <sys/stat.h>
 //# include <dir.h>
 # include <stdint.h>
+
+#include "dash/env.h"
 
 typedef struct t_env
 {
