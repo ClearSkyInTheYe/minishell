@@ -12,12 +12,14 @@
 
 #include "minishell.h"
 
-void	pwd(void)
+void	pwd(t_data *d)
 {
-	char	dir[4096];
+	t_env	*e;
 
-	getcwd(dir, 4096);
-	printf("%s\n", dir);
+	e = d->env1;
+	while (ft_strncmp("PWD", e->en, 3) != 0)
+		e = e->next;
+	printf("%s\n", e->en + 4);
 }
 
 void	env(t_data *d)

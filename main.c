@@ -65,7 +65,7 @@ void	ft_parser(char *s, t_data *d)
 	}
 	if (ft_strcmp(s, "pwd\n") == 0)
 	{
-		pwd();
+		pwd(d);
 		return ;
 	}
 	else
