@@ -50,6 +50,7 @@ int		env_len(char **env);
 t_env	*init_env(t_data *d, t_env *e, char **env);
 void	rl_replace_line(const char *text, int clear_undo);
 void	sighand(int sig);
+int		ft_strcmp(char *s1, char *s2);
 void	pwd(void);
 void	env(t_data *d);
 

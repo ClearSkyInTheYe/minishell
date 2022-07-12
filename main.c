@@ -14,6 +14,25 @@
 
 char	g_mask[3] = "000";
 
+int	check_builtin(char *s)
+{
+	if (ft_strcmp(s, "exit\n") == 0)
+		return (1);
+	if (ft_strcmp(s, "pwd\n") == 0)
+		return (1);
+	if (ft_strcmp(s, "env\n") == 0)
+		return (1);
+	if (ft_strcmp(s, "echo\n") == 0)
+		return (1);
+	if (ft_strcmp(s, "cd\n") == 0)
+		return (1);
+	if (ft_strcmp(s, "export\n") == 0)
+		return (1);
+	if (ft_strcmp(s, "unset\n") == 0)
+		return (1);
+	return (0);
+}
+
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
@@ -39,10 +58,16 @@ void	ft_parser(char *s, t_data *d)
 		d->ex = 2;
 		return ;
 	}
-	else if (ft_strcmp(s, "pwd\n") == 0)
-		pwd();
 	if (ft_strcmp(s, "env\n") == 0)
+	{
 		env(d);
+		return ;
+	}
+	if (ft_strcmp(s, "pwd\n") == 0)
+	{
+		pwd();
+		return ;
+	}
 	else
 		printf ("command not found: %s\n", s);
 }
