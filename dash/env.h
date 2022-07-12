@@ -6,13 +6,14 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
-typedef struct s_cmd
+typedef struct	s_cmd
 {
-    char *paths;
-    char **cmd_paths;
-    int p;
-    char    *str;
+    char	*paths;
+    char	**cmd_paths;
+    int		p;
+    char	*str;
+    int		is_pipe;
+    char	*left_pipe;
     // int fd[2];
 } t_cmd;
 
