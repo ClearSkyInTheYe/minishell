@@ -26,8 +26,7 @@
 # include <sys/stat.h>
 //# include <dir.h>
 # include <stdint.h>
-
-#include "dash/env.h"
+# include "dash/env.h"
 
 typedef struct t_env
 {
@@ -52,5 +51,6 @@ t_env	*init_env(t_data *d, t_env *e, char **env);
 void	rl_replace_line(const char *text, int clear_undo);
 void	sighand(int sig);
 void	pwd(void);
+void	env(t_data *d);
 
 #endif

@@ -37,9 +37,14 @@ void	ft_parser(char *s, t_data *d)
 	if (ft_strcmp(s, "exit\n") == 0)
 	{
 		d->ex = 2;
+		return ;
 	}
-	// if (ft_strcmp(s, "pwd\n") == 0)
-	// 	pwd();
+	else if (ft_strcmp(s, "pwd\n") == 0)
+		pwd();
+	if (ft_strcmp(s, "env\n") == 0)
+		env(d);
+	else
+		printf ("command not found: %s\n", s);
 }
 
 void	sighand(int sig)
@@ -74,8 +79,7 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		add_history(s);
-		cmd->str = s; /* записываю строку из stdin целиком в структуру, 
-						наверное ее и будем парсить */
+		cmd->str = s; /* записываю строку из stdin целиком в структуру, наверное ее и будем парсить */
 		rl_catch_signals = 1;
 		if (!s)
 			break ;

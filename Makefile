@@ -14,6 +14,7 @@ NAME = minishell
 
 SRCS =	main.c envinit.c \
 		dash/cmd.c dash/ft_putstr_fd.c dash/ft_split.c dash/ft_strjoin.c dash/ft_strlen.c dash/ft_strncmp.c \
+		pwd.c
 
 HEADER = minishell.h
 
