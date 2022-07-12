@@ -6,7 +6,7 @@
 /*   By: slaree <slaree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 23:38:16 by chfederi          #+#    #+#             */
-/*   Updated: 2022/07/11 22:14:31 by slaree           ###   ########.fr       */
+/*   Updated: 2022/07/12 20:36:49 by slaree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	char		*s;
 	t_data		d;
-	t_env		*e;
+	t_list		*e;
 	extern int	rl_catch_signals;
 	t_cmd *cmd; //добавила структуру, где будут лежать пути к исполняемым файлам команд
 

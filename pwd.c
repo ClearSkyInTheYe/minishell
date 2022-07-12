@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chfederi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: slaree <slaree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 19:48:42 by chfederi          #+#    #+#             */
-/*   Updated: 2022/07/11 19:48:47 by chfederi         ###   ########.fr       */
+/*   Updated: 2022/07/12 20:38:06 by slaree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	pwd(t_data *d)
 {
-	t_env	*e;
+	t_list	*e;
 
 	e = d->env1;
 	while (ft_strncmp("PWD", e->en, 3) != 0)
@@ -24,7 +24,7 @@ void	pwd(t_data *d)
 
 void	env(t_data *d)
 {
-	t_env	*e;
+	t_list	*e;
 
 	e = d->env1;
 	while (e->next)

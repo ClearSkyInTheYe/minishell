@@ -6,7 +6,7 @@
 /*   By: slaree <slaree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 23:29:09 by chfederi          #+#    #+#             */
-/*   Updated: 2022/07/12 20:25:40 by slaree           ###   ########.fr       */
+/*   Updated: 2022/07/12 20:37:45 by slaree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,26 @@
 # include <stdint.h>
 # include "dash/env.h"
 
-typedef struct t_env
+typedef struct t_list
 {
-	struct t_env		*next;
+	struct t_list		*next;
 	char				*en;
 	int					n;
-}t_env;
+}t_list;
 
 typedef struct s_data
 {
 	int		ex;
 	int		in;
 	int		out;
-	t_env	*env1;
+	t_list	*env1;
 	char	**env;
 }t_data;
 
 //char	g_mask[3] = "000";
 
 int		env_len(char **env);
-t_env	*init_env(t_data *d, t_env *e, char **env);
+t_list	*init_env(t_data *d, t_list *e, char **env);
 void	rl_replace_line(const char *text, int clear_undo);
 void	sighand(int sig);
 int		ft_strcmp(char *s1, char *s2);

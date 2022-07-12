@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envinit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chfederi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: slaree <slaree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 21:40:59 by chfederi          #+#    #+#             */
-/*   Updated: 2022/07/03 21:41:02 by chfederi         ###   ########.fr       */
+/*   Updated: 2022/07/12 20:37:21 by slaree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int	env_len(char **env)
 	return (i);
 }
 
-t_env	*new_list(char *s, int n)
+t_list	*new_list(char *s, int n)
 {
-	t_env	*e;
+	t_list	*e;
 
-	e = malloc(sizeof (t_env));
+	e = malloc(sizeof (t_list));
 	if (!e)
 		return (NULL);
 	e->next = NULL;
@@ -35,7 +35,7 @@ t_env	*new_list(char *s, int n)
 	return (e);
 }
 
-void	add_list_env(t_env *e, t_env *new)
+void	add_list_env(t_list *e, t_list *new)
 {
 	while (e->next)
 	{
@@ -44,10 +44,10 @@ void	add_list_env(t_env *e, t_env *new)
 	e->next = new;
 }
 
-t_env	*init_env(t_data *d, t_env *e, char **env)
+t_list	*init_env(t_data *d, t_list *e, char **env)
 {
 	int		i;
-	t_env	*tmp;
+	t_list	*tmp;
 
 	i = 1;
 	d->env = env;
