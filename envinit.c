@@ -6,7 +6,7 @@
 /*   By: slaree <slaree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 21:40:59 by chfederi          #+#    #+#             */
-/*   Updated: 2022/07/12 20:37:21 by slaree           ###   ########.fr       */
+/*   Updated: 2022/07/12 21:59:40 by slaree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ int	env_len(char **env)
 	return (i);
 }
 
-t_list	*new_list(char *s, int n)
+t_env	*new_list(char *s, int n)
 {
-	t_list	*e;
+	t_env	*e;
 
-	e = malloc(sizeof (t_list));
+	e = malloc(sizeof (t_env));
 	if (!e)
 		return (NULL);
 	e->next = NULL;
-	e->en = s;
-	e->n = n;
+	e->val= s;
+	e->ind = n;
 	return (e);
 }
 
-void	add_list_env(t_list *e, t_list *new)
+void	add_list(t_env *e, t_env *new)
 {
 	while (e->next)
 	{
@@ -44,10 +44,10 @@ void	add_list_env(t_list *e, t_list *new)
 	e->next = new;
 }
 
-t_list	*init_env(t_data *d, t_list *e, char **env)
+t_env	*init_env(t_data *d, t_env *e, char **env)
 {
 	int		i;
-	t_list	*tmp;
+	t_env	*tmp;
 
 	i = 1;
 	d->env = env;
@@ -56,7 +56,7 @@ t_list	*init_env(t_data *d, t_list *e, char **env)
 		return (NULL);
 	while (i < env_len(env) + 1)
 	{
-		add_list_env(tmp, new_list(env[i], i));
+		add_list(tmp, new_list(env[i], i));
 		i++;
 	}
 	return (tmp);

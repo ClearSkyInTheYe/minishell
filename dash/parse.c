@@ -1,16 +1,25 @@
 
 #include "env.h"
 
-char	*parse_cmd(char *s)
+int	parse_cmd(t_cmd *cmd)
 {
 	char	**arr;
 	int		len;
+	int		i;
 
-	arr = ft_split(s, ' '); //if (!arr)
-	len = ft_count_words(s, ' ');
-	
-
+	arr = ft_split(cmd->str, ' '); //if (!arr)
+	len = ft_count_words(cmd->str, ' ');
+	i = 0;
+	cmd->c_list = new_list(arr[i], i);
+		if (!cmd->c_list)
+			return (1);
+	while (arr[i++])
+	{
+		add_list(cmd->c_list, new_list(arr[i], i));
+	}
+	return (0);
 }
+
 
 int	is_pipe(t_cmd *cmd)
 {
