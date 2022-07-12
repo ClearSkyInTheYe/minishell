@@ -6,7 +6,7 @@
 #    By: slaree <slaree@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/28 23:28:44 by chfederi          #+#    #+#              #
-#    Updated: 2022/07/11 21:26:22 by slaree           ###   ########.fr        #
+#    Updated: 2022/07/12 16:51:59 by slaree           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ $(NAME):	$(OBJS)
 				$(CC) $(RLFLAGS) $^ -o $@
 				
 %.o		:	%.c $(HEADER) Makefile
-			$(CC) $(RLFLAGS) -c $< -o $@ 
+			$(CC) -c $< -o $@ 
 
 clean	:	
 			rm -rf $(OBJS)
