@@ -1,6 +1,17 @@
 
 #include "env.h"
 
+char	*parse_cmd(char *s)
+{
+	char	**arr;
+	int		len;
+
+	arr = ft_split(s, ' '); //if (!arr)
+	len = ft_count_words(s, ' ');
+	
+
+}
+
 int	is_pipe(t_cmd *cmd)
 {
     char	*line;
