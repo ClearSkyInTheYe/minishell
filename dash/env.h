@@ -13,16 +13,31 @@
 #ifndef ENV_H
 # define ENV_H
 
+<<<<<<< HEAD
+#include <stdio.h>
+
+#include <stdlib.h>
+#include <unistd.h>
+
+typedef struct	s_cmd
+=======
 # include<stdio.h>
 # include<stdlib.h>
 # include<unistd.h>
 
 typedef struct s_cmd
+>>>>>>> b6be96c662b2fcd0ba2ab09c69b199304b1b6ba0
 {
     char	*paths;
     char	**cmd_paths;
     int		p;
+<<<<<<< HEAD
+    char	*str;
+    int		is_pipe;
+    char	*left_pipe;
+=======
     char    *str;
+>>>>>>> b6be96c662b2fcd0ba2ab09c69b199304b1b6ba0
     // int fd[2];
 }t_cmd;
 

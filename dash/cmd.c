@@ -14,33 +14,15 @@ char	*find_path(char **envp)
 	return (*envp + 5);
 }
 
-char *get_cmd(char **paths, char *cmd)
-{
-    char *tmp;
-    char *c;
-
-    while (*paths)
-    {
-        tmp = ft_strjoin(*paths, "/");
-        c = ft_strjoin(tmp, cmd);
-        free(tmp);
-        if (access(c, 0) == 0)
-            return (c);
-        free(c);
-        paths++;
-    }
-    return (NULL);
-}
-
 t_cmd *init_cmd(char **envp)
 {
     t_cmd *cmd;
 
     cmd = malloc(sizeof(t_cmd));
     cmd->paths = find_path(envp);
+    cmd->is_pipe = 0; //set default as 0; 1 if pipe
     cmd->p = ft_count_words(cmd->paths, ':'); //cmd->p - это количество путей в path
     cmd->cmd_paths = ft_split(cmd->paths, ':'); //free
-    // cmd->str = str; //запишем строку как есть в структуру для начала 
 
     // int i = -1;
     // while (++i < cmd->p)
