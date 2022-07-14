@@ -6,7 +6,7 @@
 /*   By: slaree <slaree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 23:38:16 by chfederi          #+#    #+#             */
-/*   Updated: 2022/07/12 22:15:06 by slaree           ###   ########.fr       */
+/*   Updated: 2022/07/14 22:11:10 by slaree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-void	ft_parser(char *s, t_data *d)
+void	ft_parser(char *s, t_data *d, t_cmd *cmd)
 {
 	if (!s)
 		return ;
@@ -68,8 +68,10 @@ void	ft_parser(char *s, t_data *d)
 		pwd(d);
 		return ;
 	}
+	if (is_pipe(cmd))
+		printf("PipE!\n");
 	else
-		printf ("command not found: %s\n", s);
+		printf ("command not found: %s\n", s);//второй фдшник, говорили тебе
 }
 
 void	sighand(int sig)
@@ -108,7 +110,7 @@ int	main(int argc, char **argv, char **envp)
 		rl_catch_signals = 1;
 		if (!s)
 			break ;
-		ft_parser(s, &d);
+		ft_parser(s, &d, cmd);
 		free(s);
 		if (d.ex == 2)
 			break ;

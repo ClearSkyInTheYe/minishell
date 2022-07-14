@@ -1,6 +1,29 @@
 
 #include "env.h"
 
+// t_env	*new_list(char *s, int n)
+// {
+// 	t_env	*e;
+
+// 	e = malloc(sizeof (t_env));
+// 	if (!e)
+// 		return (NULL);
+// 	e->next = NULL;
+// 	e->val= s;
+// 	e->ind = n;
+// 	return (e);
+// }
+
+// void	add_list(t_env *e, t_env *new)
+// {
+// 	while (e->next)
+// 	{
+// 		e = e->next;
+// 	}
+// 	e->next = new;
+// }
+//////////////////////////////////////////////////////////////////
+
 int	parse_cmd(t_cmd *cmd)
 {
 	char	**arr;
@@ -20,33 +43,39 @@ int	parse_cmd(t_cmd *cmd)
 	return (0);
 }
 
+char *ft_cpystr(char *src, int len)
+{
+		char *dst;
+		int	i;
+
+		i = 0;
+		while (src[i] && i < len)
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		return (dst);
+}
 
 int	is_pipe(t_cmd *cmd)
 {
     char	*line;
 	char	*res;
+	int		len;
     int		i;
 
-	i = -1;
+	i = 0;
+	// res = "\0";
     line = cmd->str;
-    while (line[++i])
-    {
-        if (line[i] == '|')
-		{
-			while (*line != '|')
-			{
-				*res = *line;
-				line++;
-				res++;
-			}
-			*res = '\0';
-			cmd->is_pipe = 1;
-			cmd->left_pipe = res;
-			return (1);
-		}	
-    }
-	*res = '\0';
-	return (0);
+	len = ft_strlen(line);
+	while (line[i] && line[i] != '|')
+		i++;
+	if (i == len)
+		return (0);
+	res = ft_cpystr(line, i);
+	if ((ft_strlen(res) + 1) == len || ft_isspace(line, i + 1))
+		return (3); // to check if waiting mode is needed
+	return (1);
 }
 
 
@@ -66,4 +95,14 @@ int	is_pipe(t_cmd *cmd)
 //         cmd->paths++;
 //     }
 //     return (NULL);
+// }
+
+// int main(int argc, char **argv, char **envp)
+// {
+// 	t_cmd *cmd;
+
+// 	cmd = init_cmd(envp);
+// 	char *s = "123456| 						         ";
+// 	cmd->str = s;
+// 	printf("%d\n",is_pipe(cmd));
 // }
