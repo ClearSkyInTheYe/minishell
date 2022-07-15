@@ -6,7 +6,7 @@
 /*   By: slaree <slaree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:59:54 by chfederi          #+#    #+#             */
-/*   Updated: 2022/07/15 16:45:51 by slaree           ###   ########.fr       */
+/*   Updated: 2022/07/15 21:04:08 by slaree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct	s_cmd
 	char	*str;
 	int		is_pipe;
 	char	*left_pipe;
+	char	*command;
 	struct t_env  *c_list;
 	// int fd[2];
 }t_cmd;
@@ -36,6 +37,8 @@ typedef struct	s_cmd
 char	*find_path(char **envp);
 char	*get_cmd(char **paths, char *cmd);
 t_cmd	*init_cmd(char **envp);
+// int	execute_simple_cmd(t_cmd *cmd, t_data *data);
+int	execute_simple_cmd(t_cmd *cmd, char **envp);
 
 //parse.c
 int	parse_cmd(t_cmd *cmd);

@@ -23,6 +23,9 @@ t_cmd *init_cmd(char **envp)
     cmd->is_pipe = 0; //set default as 0; 1 if pipe
     cmd->p = ft_count_words(cmd->paths, ':'); //cmd->p - это количество путей в path
     cmd->cmd_paths = ft_split(cmd->paths, ':'); //free
+    cmd->command = NULL;
+    // cmd->left_pipe = NULL;
+    // cmd->str = NULL;
 
     // int i = -1;
     // while (++i < cmd->p)
@@ -30,13 +33,16 @@ t_cmd *init_cmd(char **envp)
     return (cmd);
 }
 
-int	execute_simple_cmd(t_cmd *cmd, t_data *data)
+// int	execute_simple_cmd(t_cmd *cmd, t_data *data)
+int	execute_simple_cmd(t_cmd *cmd, char **envp)
 {
-	char	**envp;
-	pid_t	pid;
+    int i = -1;
+    while (++i < cmd->p)
+        printf("%s\n", cmd->cmd_paths[i]);
 
-    envp = data->env;
+
+
     // pid = fork();
     
-
+    return (0);
 }
