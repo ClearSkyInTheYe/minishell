@@ -71,7 +71,7 @@ void	ft_parser(char *s, t_data *d, t_cmd *cmd)
 	if (is_pipe(cmd))
 		printf("PipE!\n");
 	else
-		printf ("command not found: %s\n", s);//второй фдшник, говорили тебе
+		printf ("command not found: %s\n", s); //второй фдшник, говорили тебе
 }
 
 void	sighand(int sig)
@@ -106,7 +106,7 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		add_history(s);
-		cmd->str = s; /* записываю строку из stdin целиком в структуру, наверное ее и будем парсить */
+		cmd->str = s; // записываю строку из stdin целиком в структуру, наверное ее и будем парсить */
 		rl_catch_signals = 1;
 		if (!s)
 			break ;
@@ -115,6 +115,6 @@ int	main(int argc, char **argv, char **envp)
 		if (d.ex == 2)
 			break ;
 	}
+	clear_history();
 	exit(3);
-//	rl_clear_history(s);
 }
