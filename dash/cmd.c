@@ -29,3 +29,14 @@ t_cmd *init_cmd(char **envp)
     //     printf("%s\n", cmd->cmd_paths[i]);
     return (cmd);
 }
+
+int	execute_simple_cmd(t_cmd *cmd, t_data *data)
+{
+	char	**envp;
+	pid_t	pid;
+
+    envp = data->env;
+    // pid = fork();
+    
+
+}

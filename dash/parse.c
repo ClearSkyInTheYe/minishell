@@ -1,27 +1,27 @@
 
 #include "env.h"
 
-// t_env	*new_list(char *s, int n)
-// {
-// 	t_env	*e;
+t_env	*new_list(char *s, int n)
+{
+	t_env	*e;
 
-// 	e = malloc(sizeof (t_env));
-// 	if (!e)
-// 		return (NULL);
-// 	e->next = NULL;
-// 	e->val= s;
-// 	e->ind = n;
-// 	return (e);
-// }
+	e = malloc(sizeof (t_env));
+	if (!e)
+		return (NULL);
+	e->next = NULL;
+	e->val= s;
+	e->ind = n;
+	return (e);
+}
 
-// void	add_list(t_env *e, t_env *new)
-// {
-// 	while (e->next)
-// 	{
-// 		e = e->next;
-// 	}
-// 	e->next = new;
-// }
+void	add_list(t_env *e, t_env *new)
+{
+	while (e->next)
+	{
+		e = e->next;
+	}
+	e->next = new;
+}
 //////////////////////////////////////////////////////////////////
 
 int	parse_cmd(t_cmd *cmd)
@@ -75,6 +75,8 @@ int	is_pipe(t_cmd *cmd)
 	res = ft_cpystr(line, i);
 	if ((ft_strlen(res) + 1) == len || ft_isspace(line, i + 1))
 		return (3); // to check if waiting mode is needed
+	line = ft_substr(line, i + 1, len - i);
+
 	return (1);
 }
 
@@ -99,10 +101,16 @@ int	is_pipe(t_cmd *cmd)
 
 // int main(int argc, char **argv, char **envp)
 // {
-// 	t_cmd *cmd;
+// 	char *path;
 
-// 	cmd = init_cmd(envp);
-// 	char *s = "123456| 						         ";
-// 	cmd->str = s;
-// 	printf("%d\n",is_pipe(cmd));
+// 	path = getenv("PATH");
+// 	printf("%s\n", path);
+
+
+// 	// t_cmd *cmd;
+
+// 	// cmd = init_cmd(envp);
+// 	// char *s = "123456|12345";
+// 	// cmd->str = s;
+// 	// printf("%d\n",is_pipe(cmd));
 // }
