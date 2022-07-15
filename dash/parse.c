@@ -34,8 +34,8 @@ int	parse_cmd(t_cmd *cmd)
 	len = ft_count_words(cmd->str, ' ');
 	i = 0;
 	cmd->c_list = new_list(arr[i], i);
-		if (!cmd->c_list)
-			return (1);
+	if (!cmd->c_list)
+		return (1);
 	while (arr[i++])
 	{
 		add_list(cmd->c_list, new_list(arr[i], i));
@@ -43,10 +43,10 @@ int	parse_cmd(t_cmd *cmd)
 	return (0);
 }
 
-char *ft_cpystr(char *src, int len)
+char	*ft_cpystr(char *src, int len)
 {
-		char *dst;
-		int	i;
+		char	*dst;
+		int		i;
 
 		i = 0;
 		while (src[i] && i < len)

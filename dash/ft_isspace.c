@@ -2,7 +2,7 @@
 
 #include "env.h"
 
-int ft_isspace(char *s, int i)
+int	ft_isspace(char *s, int i)
 {
 	int len;
 	int	tmp;

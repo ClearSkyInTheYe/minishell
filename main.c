@@ -91,12 +91,12 @@ int	main(int argc, char **argv, char **envp)
 	t_data		d;
 	t_env		*e;
 	extern int	rl_catch_signals;
-	t_cmd *cmd; //добавила структуру, где будут лежать пути к исполняемым файлам команд
+	t_cmd		*cmd; //добавила структуру, где будут лежать пути к исполняемым файлам команд
 
 	(void )argc;
 	(void )argv;
 	d.env1 = init_env(&d, e, envp);
-	cmd = init_cmd(envp);//добавила инит структуры
+	cmd = init_cmd(envp);
 	while (1)
 	{
 		rl_catch_signals = 0;
