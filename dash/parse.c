@@ -45,16 +45,16 @@ int	parse_cmd(t_cmd *cmd)
 
 char	*ft_cpystr(char *src, int len)
 {
-		char	*dst;
-		int		i;
+	char	*dst;
+	int		i;
 
-		i = 0;
-		while (src[i] && i < len)
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		return (dst);
+	i = 0;
+	while (src[i] && i < len)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	return (dst);
 }
 
 int	is_pipe(t_cmd *cmd)
