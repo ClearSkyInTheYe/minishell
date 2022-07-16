@@ -27,6 +27,7 @@
 //# include <dir.h>
 # include <stdint.h>
 # include "dash/env.h"
+# include "env.h"
 
 typedef struct t_env
 {
@@ -60,5 +61,6 @@ void	env(t_data *d);
 int		ctoi(char *s);
 char	*ft_itoa(int n);
 void	sh_lvl(char **env);
+int		stacklen(t_env	*c_list);
 
 #endif

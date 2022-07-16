@@ -27,11 +27,13 @@
 int	parse_cmd(t_cmd *cmd)
 {
 	char	**arr;
-	int		len;
+//	int		len;
 	int		i;
 
-	arr = ft_split(cmd->str, ' '); //if (!arr)
-	len = ft_count_words(cmd->str, ' ');
+	arr = ft_split(cmd->str, ' ');
+	if (!arr)
+		return (0);
+//	len = ft_count_words(cmd->str, ' '); // мне кажется что это тут не нужно
 	i = 0;
 	cmd->c_list = new_list(arr[i], i);
 	if (!cmd->c_list)
@@ -40,6 +42,7 @@ int	parse_cmd(t_cmd *cmd)
 	{
 		add_list(cmd->c_list, new_list(arr[i], i));
 	}
+	free(arr);//каждый элемент масива возможно стоит фришить но тогда в листы пихать малоченые строки
 	return (0);
 }
 
@@ -47,13 +50,20 @@ char	*ft_cpystr(char *src, int len)
 {
 	char	*dst;
 	int		i;
+//	char	*tmp;
 
 	i = 0;
+	dst = malloc(sizeof (char ) * len);
+	if (!dst)
+		return (NULL);
 	while (src[i] && i < len)
 	{
 		dst[i] = src[i];
 		i++;
 	}
+	dst[i] = '\0';
+//	tmp = dst;
+//	free(dst);
 	return (dst);
 }
 
@@ -75,10 +85,21 @@ int	is_pipe(t_cmd *cmd)
 		cmd->command = line;
 		return (0);
 	}
-	res = ft_cpystr(line, i);
-	if ((ft_strlen(res) + 1) == len || ft_isspace(line, i + 1))
+//	printf("%s\n", line);
+//	return (2);
+	res = ft_cpystr(line, i);// ваще наверное субстром стоило))
+//	cmd->left_pipe = ft_cpystr(line, i);
+	if ((ft_strlen(res) + 1) == len || ft_isspace(line, i) || !res)
+	{
 		return (3); // to check if waiting mode is needed
+	}
+//	if ((ft_strlen(cmd->left_pipe) + 1) == len || ft_isspace(line, i) || !cmd->left_pipe)
+//	{
+//		return (3); // to check if waiting mode is needed
+//	}
 	cmd->left_pipe = res;
+//	printf("%s\n", res);
+//	free(res);
 	line = ft_substr(line, i + 1, len - i);
 	return (1);
 }

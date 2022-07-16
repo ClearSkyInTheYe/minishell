@@ -47,31 +47,58 @@ int	ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
+static void	one_simple_b(t_cmd *cmd, t_data *d)
+{
+	if (stacklen(cmd->c_list) == 1 && check_builtin(cmd->c_list->val))
+	{
+		if (ft_strcmp(cmd->c_list->val, "exit") == 0)
+		{
+			d->ex = 2;
+			return ;
+		}
+		if (ft_strcmp(cmd->c_list->val, "env") == 0)
+		{
+			env(d);
+			return ;
+		}
+		if (ft_strcmp(cmd->c_list->val, "pwd") == 0)
+		{
+			pwd(d);
+			return ;
+		}
+	}
+}
+
 void	ft_parser(char *s, t_data *d, t_cmd *cmd)
 {
 	if (!s)
 		return ;
 	if (s[0] == 0)
 		return ;
-	if (ft_strcmp(s, "exit\n") == 0)
-	{
-		d->ex = 2;
-		return ;
-	}
-	if (ft_strcmp(s, "env\n") == 0)
-	{
-		env(d);
-		return ;
-	}
-	if (ft_strcmp(s, "pwd\n") == 0)
-	{
-		pwd(d);
-		return ;
-	}
+	parse_cmd(cmd);
+	one_simple_b(cmd, d);
+//	if (ft_strcmp(s, "exit\n") == 0)
+//	{
+//		d->ex = 2;
+//		return ;
+//	}
+//	if (ft_strcmp(s, "env\n") == 0)
+//	{
+//		env(d);
+//		return ;
+//	}
+//	if (ft_strcmp(s, "pwd\n") == 0)
+//	{
+//		pwd(d);
+//		return ;
+//	}
 	if (is_pipe(cmd))
+	{
+//		printf("%s\n", cmd->left_pipe);
 		printf("PipE!\n");
-	else
-		printf ("command not found: %s\n", s); //второй фдшник, говорили тебе
+	}
+//	else
+//		printf ("command not found: %s\n", s); //второй фдшник, говорили тебе
 }
 
 void	sighand(int sig)
@@ -107,7 +134,7 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		add_history(s);
-		cmd->str = s; // записываю строку из stdin целиком в структуру, наверное ее и будем парсить */
+		cmd->str = s;// записываю строку из stdin целиком в структуру, наверное ее и будем парсить */
 		rl_catch_signals = 1;
 		if (!s)
 			break ;

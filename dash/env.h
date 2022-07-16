@@ -57,5 +57,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 int		ft_isspace(char *s, int i);
 
+void	one_simple_b(t_cmd *cmd, t_data *d); //тебе пихнул тут не ругается не убирай ее она милая
+
 
 #endif

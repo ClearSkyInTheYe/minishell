@@ -22,6 +22,7 @@ OBJS		=	$(SRCS:.c=.o)
 
 CC = gcc
 # CFLAGS = -Wall -Wextra -Werror
+# -g -fsanitize=address
 RLFLAGS = -lreadline -L ~/.brew/opt/readline/lib
 all:		$(NAME)
 

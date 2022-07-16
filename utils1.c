@@ -115,3 +115,18 @@ char	*ft_itoa(int n)
 	s[i] = '\0';
 	return (s);
 }
+
+int	stacklen(t_env	*c_list)
+{
+	int	i;
+
+	if (!c_list)
+		return (0);
+	i = -1;
+	while (c_list)
+	{
+		i++;
+		c_list = c_list->next;
+	}
+	return (i);
+}
