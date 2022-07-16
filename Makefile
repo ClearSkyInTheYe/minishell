@@ -12,7 +12,7 @@
 
 NAME = minishell
 
-SRCS =	main.c envinit.c \
+SRCS =	main.c envinit.c utils1.c\
 		dash/cmd.c dash/ft_putstr_fd.c dash/ft_split.c dash/ft_strjoin.c dash/ft_strlen.c dash/ft_strncmp.c dash/parse.c dash/ft_isspace.c dash/ft_substr.c\
 		pwd.c
 

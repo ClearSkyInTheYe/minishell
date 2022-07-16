@@ -62,12 +62,17 @@ t_env	*init_env(t_data *d, t_env *e, char **env)
 	return (tmp);
 }
 
-//void	sh_lvl(char **env)
-//{
-//	int	i;
-//
-//	i = 0;
-//	while (ft_strncmp("SHLVL=", env[i], 5) != 0)
-//		i++;
-//	env[i] = "SHLVL="
-//}
+void	sh_lvl(char **env)
+{
+	int		i;
+	int		x;
+	char	*s;
+
+	i = 0;
+	while (ft_strncmp("SHLVL=", env[i], 6) != 0)
+		i++;
+	x = ctoi(env[i] + 6) + 1;
+	s = ft_itoa(x);
+	env[i][6] = s[0];
+	free(s);
+}

@@ -95,6 +95,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void )argc;
 	(void )argv;
+	sh_lvl(envp);
 	d.env1 = init_env(&d, e, envp);
 	cmd = init_cmd(envp);
 	while (1)

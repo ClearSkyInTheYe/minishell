@@ -52,12 +52,13 @@ int		env_len(char **env);
 t_env	*new_list(char *s, int n);
 void	add_list(t_env *e, t_env *new);
 t_env	*init_env(t_data *d, t_env *e, char **env);
-
-
 void	rl_replace_line(const char *text, int clear_undo);
 void	sighand(int sig);
 int		ft_strcmp(char *s1, char *s2);
 int		pwd(t_data *d);
 void	env(t_data *d);
+int		ctoi(char *s);
+char	*ft_itoa(int n);
+void	sh_lvl(char **env);
 
 #endif
