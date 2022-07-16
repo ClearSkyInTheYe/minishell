@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+struct t_data;
 
 typedef struct	s_cmd
 {
@@ -56,8 +57,5 @@ size_t	ft_strlen(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 int		ft_isspace(char *s, int i);
-
-void	one_simple_b(t_cmd *cmd, t_data *d); //тебе пихнул тут не ругается не убирай ее она милая
-
 
 #endif
