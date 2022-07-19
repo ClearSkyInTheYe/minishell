@@ -46,7 +46,7 @@ int	parse_cmd(t_cmd *cmd)
 	return (0);
 }
 
-char	*ft_cpystr(char *src, int len)
+static char	*ft_cpystr(char *src, int len)
 {
 	char	*dst;
 	int		i;
@@ -105,23 +105,50 @@ int	is_pipe(t_cmd *cmd)
 }
 
 
-// char *is_cmd(t_cmd *cmd)
-// {
-//     char *tmp;
-//     char *c;
+int is_cmd(t_cmd *cmd)
+{
+	/* тут, понятное дело, все написано на соплях. нет форков итд
+	похоже именно поэтому после выполнения ./minishell сразу выходит
 
-//     while (cmd->paths)
-//     {
-//         tmp = ft_strjoin(cmd->paths, "/");
-//         c = ft_strjoin(tmp, //cmd);// put splitted word or command
-//         free(tmp);
-//         if (access(c, 0) == 0)
-//             return (c);
-//         free(c);
-//         cmd->paths++;
-//     }
-//     return (NULL);
-// }
+	кроме того я не смогла победить компуктер и включить t_data в свою функцию
+	поэтому я продублировала char **envp в свою структуру,
+	что конечно нужно будет переделать 
+	пока тут работает только команда ls, 
+	потому что я вручную передаю ей флаги с помощью char *cmd_args что довольно тупо)))
+	а с другими командами вообще подвисает
+	такие дела*/
+    char	*tmp;
+    char	*c;
+	int		i;
+	char *cmd_args[2];//это убрать потом
+
+	cmd_args[0] = "-la";//это второй аргумент для execve(флаги к команде ls), 
+						//потому что их тоже надо распарсить куда-то
+	i = 0;
+    while (cmd->cmd_paths[i])
+    {
+        tmp = ft_strjoin(cmd->cmd_paths[i], "/");
+        c = ft_strjoin(tmp, cmd->c_list->val);// put splitted word or command
+        free(tmp);
+        if (access(c, 0) == 0)
+		{
+			cmd->exec_list = new_list(c, 0);//0 for ind maybe replaced by static variable
+			// printf("CMD PATH %s\n", cmd->exec_list->val);
+			// printf("%d\n", i);
+			if (execve(cmd->exec_list->val, cmd_args, cmd->env) < 0)
+			{
+				ft_putstr_fd("Execve error\n", 2);
+				free(c);
+				return (-1);
+			}
+			free(c);
+            return (1);
+		}
+		free(c);
+		i++;
+    }
+    return (0);
+}
 
 // int main(int argc, char **argv, char **envp)
 // {

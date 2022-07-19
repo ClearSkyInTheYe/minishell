@@ -1,7 +1,5 @@
 #include "env.h"
 
-// t_cmd *init_cmd(char **envp)
-
 char	*find_path(char **envp)
 {
 	while (*envp && ft_strncmp("PATH", *envp, 4))
@@ -24,6 +22,7 @@ t_cmd *init_cmd(char **envp)
     cmd->p = ft_count_words(cmd->paths, ':'); //cmd->p - это количество путей в path
     cmd->cmd_paths = ft_split(cmd->paths, ':'); //free
     cmd->command = NULL;
+    cmd->env = envp;
     // cmd->left_pipe = NULL;
     // cmd->str = NULL;
 
@@ -31,18 +30,4 @@ t_cmd *init_cmd(char **envp)
     // while (++i < cmd->p)
     //     printf("%s\n", cmd->cmd_paths[i]);
     return (cmd);
-}
-
-// int	execute_simple_cmd(t_cmd *cmd, t_data *data)
-int	execute_simple_cmd(t_cmd *cmd, char **envp)
-{
-    int i = -1;
-    while (++i < cmd->p)
-        printf("%s\n", cmd->cmd_paths[i]);
-
-
-
-    // pid = fork();
-    
-    return (0);
 }

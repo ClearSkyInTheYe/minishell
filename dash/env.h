@@ -6,7 +6,7 @@
 /*   By: slaree <slaree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:59:54 by chfederi          #+#    #+#             */
-/*   Updated: 2022/07/15 21:04:08 by slaree           ###   ########.fr       */
+/*   Updated: 2022/07/19 02:36:02 by slaree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,19 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-struct t_data;
 
 typedef struct	s_cmd
 {
-	char	*paths;
-	char	**cmd_paths;
-	int		p;
-	char	*str;
-	int		is_pipe;
-	char	*left_pipe;
-	char	*command;
-	struct t_env  *c_list;
+	char			**env;
+	char			*paths;
+	char			**cmd_paths;
+	int				p;
+	char			*str;
+	int				is_pipe;
+	char			*left_pipe;
+	char			*command;
+	struct t_env 	*c_list;
+	struct t_env	*exec_list;
 	// int fd[2];
 }t_cmd;
 
@@ -44,6 +45,7 @@ int	execute_simple_cmd(t_cmd *cmd, char **envp);
 //parse.c
 int	parse_cmd(t_cmd *cmd);
 int	is_pipe(t_cmd *cmd);
+int is_cmd(t_cmd *cmd);
 
 //ft_split.c
 size_t	ft_count_words(char const *s, char c);
