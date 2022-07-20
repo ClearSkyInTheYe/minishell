@@ -6,7 +6,7 @@
 /*   By: slaree <slaree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 23:38:16 by chfederi          #+#    #+#             */
-/*   Updated: 2022/07/19 02:47:19 by slaree           ###   ########.fr       */
+/*   Updated: 2022/07/20 18:41:37 by slaree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ int	ft_strcmp(char *s1, char *s2)
 
 static void	one_simple_b(t_cmd *cmd, t_data *d)
 {
-	// is_cmd(cmd);
+	// printf("Command detection %d\n", is_cmd(cmd));
+	if (is_cmd(cmd))
+		exec_simple(cmd);
 	if (stacklen(cmd->c_list) == 1 && check_builtin(cmd->c_list->val))
 	{
 		if (ft_strcmp(cmd->c_list->val, "exit") == 0)
@@ -76,7 +78,7 @@ void	ft_parser(char *s, t_data *d, t_cmd *cmd)
 		return ;
 	if (s[0] == 0)
 		return ;
-	parse_cmd(cmd);
+	parse_cmd(cmd);//продумать порядок парсера
 	one_simple_b(cmd, d);
 //	if (ft_strcmp(s, "exit\n") == 0)
 //	{
@@ -93,11 +95,8 @@ void	ft_parser(char *s, t_data *d, t_cmd *cmd)
 //		pwd(d);
 //		return ;
 //	}
-	if (is_pipe(cmd))
-	{
-//		printf("%s\n", cmd->left_pipe);
-		printf("PipE!\n");
-	}
+	if (is_pipe(cmd)) //это надо перед parse_cmd
+		printf("PipE!\n"); 
 //	else
 //		printf ("command not found: %s\n", s); //второй фдшник, говорили тебе
 }
@@ -119,7 +118,7 @@ int	main(int argc, char **argv, char **envp)
 	t_data		d;
 	t_env		*e;
 	extern int	rl_catch_signals;
-	t_cmd		*cmd; //добавила структуру, где будут лежать пути к исполняемым файлам команд
+	t_cmd		*cmd;
 
 	(void )argc;
 	(void )argv;
@@ -135,7 +134,7 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		add_history(s);
-		cmd->str = s;// записываю строку из stdin целиком в структуру, наверное ее и будем парсить */
+		cmd->str = s;
 		rl_catch_signals = 1;
 		if (!s)
 			break ;

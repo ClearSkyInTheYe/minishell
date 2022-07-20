@@ -27,22 +27,20 @@
 int	parse_cmd(t_cmd *cmd)
 {
 	char	**arr;
-//	int		len;
+	int		len;
 	int		i;
 
 	arr = ft_split(cmd->str, ' ');
 	if (!arr)
 		return (0);
-//	len = ft_count_words(cmd->str, ' '); // мне кажется что это тут не нужно
+	len = ft_count_words(cmd->str, ' '); // это нужно 
 	i = 0;
 	cmd->c_list = new_list(arr[i], i);
 	if (!cmd->c_list)
 		return (1);
-	while (arr[i++])
-	{
+	while (++i < len)
 		add_list(cmd->c_list, new_list(arr[i], i));
-	}
-	free(arr);//каждый элемент масива возможно стоит фришить но тогда в листы пихать малоченые строки
+	// free(arr);//каждый элемент масива возможно стоит фришить но тогда в листы пихать малоченые строки
 	return (0);
 }
 
@@ -89,7 +87,8 @@ int	is_pipe(t_cmd *cmd)
 //	return (2);
 	res = ft_cpystr(line, i);// ваще наверное субстром стоило))
 //	cmd->left_pipe = ft_cpystr(line, i);
-	if ((ft_strlen(res) + 1) == len || ft_isspace(line, i) || !res)
+	if ((ft_strlen(res) + 1) == len || ft_isspace(line, i) || !res)//коммент от Дашули:
+								//здесь нужно убрать условие !res 
 	{
 		return (3); // to check if waiting mode is needed
 	}
@@ -99,7 +98,7 @@ int	is_pipe(t_cmd *cmd)
 //	}
 	cmd->left_pipe = res;
 //	printf("%s\n", res);
-//	free(res);
+	// free(res);
 	line = ft_substr(line, i + 1, len - i);
 	return (1);
 }
@@ -120,11 +119,9 @@ int is_cmd(t_cmd *cmd)
     char	*tmp;
     char	*c;
 	int		i;
-	char *cmd_args[2];//это убрать потом
 
-	cmd_args[0] = "-la";//это второй аргумент для execve(флаги к команде ls), 
-						//потому что их тоже надо распарсить куда-то
 	i = 0;
+
     while (cmd->cmd_paths[i])
     {
         tmp = ft_strjoin(cmd->cmd_paths[i], "/");
@@ -132,15 +129,7 @@ int is_cmd(t_cmd *cmd)
         free(tmp);
         if (access(c, 0) == 0)
 		{
-			cmd->exec_list = new_list(c, 0);//0 for ind maybe replaced by static variable
-			// printf("CMD PATH %s\n", cmd->exec_list->val);
-			// printf("%d\n", i);
-			if (execve(cmd->exec_list->val, cmd_args, cmd->env) < 0)
-			{
-				ft_putstr_fd("Execve error\n", 2);
-				free(c);
-				return (-1);
-			}
+			cmd->exec_list = new_list(c, 0);
 			free(c);
             return (1);
 		}
@@ -150,23 +139,41 @@ int is_cmd(t_cmd *cmd)
     return (0);
 }
 
-// int main(int argc, char **argv, char **envp)
-// {
-// 	// char *path;
+void	exec_simple(t_cmd *cmd)
+{
+	char	**c_args;
+	int		i;
+	int		ind;
+	t_env	*tmp;
 
-// 	// path = getenv("PATH");
-// 	// printf("%s\n", path);
-
-
-// 	t_cmd *cmd;
-
-// 	cmd = init_cmd(envp);
-	
-
-// 	char *s = "ls";
-// 	cmd->str = s;
-// 	printf("%d\n",is_pipe(cmd));
-
-// 	execute_simple_cmd(cmd, envp);
-
-// }
+	i = 0;
+	tmp = cmd->c_list;
+	while(tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	c_args = malloc(sizeof(char*) * i);
+	if (!c_args)
+	{
+		ft_putstr_fd("Malloc error\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	cmd->c_list = cmd->c_list->next;
+	ind = 0;
+	while (--i > 0)
+	{
+		// c_args[ind] = malloc(sizeof(char) *ft_strlen(cmd->c_list->val));//может не надо?)//если надо, то добавить if (!c_args[ind])
+		c_args[ind] = cmd->c_list->val;//вроде так работает, ноя подумала, что может быть можно массив войд пойнтеров сделать?)
+		// printf("%s\n", c_args[ind]);
+		ind++;
+		// printf("%i\n", i);
+		// printf("%d %s\n", cmd->c_list->ind, cmd->c_list->val);
+		cmd->c_list = cmd->c_list->next;
+	}
+	if (execve(cmd->exec_list->val, c_args, cmd->env) < 0) //ФОРКИ! А то выходит
+	{
+		ft_putstr_fd("Execve error\n", 2);
+		exit(EXIT_FAILURE);
+	}
+}
