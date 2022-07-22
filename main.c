@@ -6,7 +6,7 @@
 /*   By: slaree <slaree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 23:38:16 by chfederi          #+#    #+#             */
-/*   Updated: 2022/07/20 18:41:37 by slaree           ###   ########.fr       */
+/*   Updated: 2022/07/22 17:27:41 by slaree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,8 @@ int	ft_strcmp(char *s1, char *s2)
 
 static void	one_simple_b(t_cmd *cmd, t_data *d)
 {
-	// printf("Command detection %d\n", is_cmd(cmd));
-	if (is_cmd(cmd))
-		exec_simple(cmd);
+	// if (is_cmd(cmd))
+	// 	exec_simple(cmd);
 	if (stacklen(cmd->c_list) == 1 && check_builtin(cmd->c_list->val))
 	{
 		if (ft_strcmp(cmd->c_list->val, "exit") == 0)

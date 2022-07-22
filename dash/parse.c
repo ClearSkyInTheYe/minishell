@@ -145,35 +145,47 @@ void	exec_simple(t_cmd *cmd)
 	int		i;
 	int		ind;
 	t_env	*tmp;
+	pid_t	pid;
 
-	i = 0;
-	tmp = cmd->c_list;
-	while(tmp)
+	pid = fork();
+	if (pid == -1)
 	{
-		i++;
-		tmp = tmp->next;
+		perror("fork");
+		return ;
 	}
-	c_args = malloc(sizeof(char*) * i);
-	if (!c_args)
+	else if (pid == 0)
 	{
-		ft_putstr_fd("Malloc error\n", 2);
-		exit(EXIT_FAILURE);
-	}
-	cmd->c_list = cmd->c_list->next;
-	ind = 0;
-	while (--i > 0)
-	{
-		// c_args[ind] = malloc(sizeof(char) *ft_strlen(cmd->c_list->val));//может не надо?)//если надо, то добавить if (!c_args[ind])
-		c_args[ind] = cmd->c_list->val;//вроде так работает, ноя подумала, что может быть можно массив войд пойнтеров сделать?)
-		// printf("%s\n", c_args[ind]);
-		ind++;
-		// printf("%i\n", i);
-		// printf("%d %s\n", cmd->c_list->ind, cmd->c_list->val);
+		i = 0;
+		tmp = cmd->c_list;
+		while(tmp)
+		{
+			i++;
+			tmp = tmp->next;
+		}
+		c_args = malloc(sizeof(char*) * i);
+		if (!c_args)
+		{
+			ft_putstr_fd("Malloc error\n", 2);
+			exit(EXIT_FAILURE);
+		}
 		cmd->c_list = cmd->c_list->next;
+		ind = 0;
+		while (--i > 0)
+		{
+			// c_args[ind] = malloc(sizeof(char) *ft_strlen(cmd->c_list->val));//может не надо?)//если надо, то добавить if (!c_args[ind])
+			c_args[ind] = cmd->c_list->val;//вроде так работает, ноя подумала, что может быть можно массив войд пойнтеров сделать?)
+			// printf("%s\n", c_args[ind]);
+			ind++;
+			// printf("%i\n", i);
+			// printf("%d %s\n", cmd->c_list->ind, cmd->c_list->val);
+			cmd->c_list = cmd->c_list->next;
+		}
+		if (execve(cmd->exec_list->val, c_args, cmd->env) < 0) //ФОРКИ! А то выходит
+		{
+			perror("execve");
+			// ft_putstr_fd("Execve error\n", 2);
+			// exit(EXIT_FAILURE);
+		}
 	}
-	if (execve(cmd->exec_list->val, c_args, cmd->env) < 0) //ФОРКИ! А то выходит
-	{
-		ft_putstr_fd("Execve error\n", 2);
-		exit(EXIT_FAILURE);
-	}
+	waitpid(pid, 0, 0);//set exitstaus
 }
