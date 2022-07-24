@@ -37,11 +37,12 @@ typedef struct t_env
 
 typedef struct s_data
 {
-	int		ex;
-	int		in;
-	int		out;
-	t_env	*env1;
-	char	**env;
+	int				ex;
+	int				in;
+	int				out;
+	t_env			*env1;
+	char			**env;
+	int				flag;
 }t_data;
 
 //char	g_mask[3] = "000";

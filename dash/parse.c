@@ -23,7 +23,6 @@
 // 	e->next = new;
 // }
 //////////////////////////////////////////////////////////////////
-
 int	parse_cmd(t_cmd *cmd)
 {
 	char	**arr;
@@ -43,6 +42,24 @@ int	parse_cmd(t_cmd *cmd)
 	// free(arr);//каждый элемент масива возможно стоит фришить но тогда в листы пихать малоченые строки
 	return (0);
 }
+//////////////////////////////////////////////////////////////////
+//int	parse_cmd(t_cmd *cmd)
+//{
+//	char	*arr;
+//	int		len;
+//	int		i;
+//
+////	arr = ft_split(cmd->str, ' ');
+////	len =
+//	i = 0;
+//	while (cmd->str[i] == ' ')
+//		i++;
+//	while (cmd->str[i])
+//	{
+//		while (cmd->str[i] == )
+//	}
+//	return (0);
+//}
 
 static char	*ft_cpystr(char *src, int len)
 {

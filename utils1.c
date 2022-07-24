@@ -121,8 +121,11 @@ int	stacklen(t_env	*c_list)
 	int	i;
 
 	if (!c_list)
+	{
+		printf("a");
 		return (0);
-	i = -1;
+	}
+	i = 0;
 	while (c_list)
 	{
 		i++;

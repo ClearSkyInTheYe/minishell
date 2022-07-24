@@ -47,7 +47,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-static void	one_simple_b(t_cmd *cmd, t_data *d)
+static int	one_simple_b(t_cmd *cmd, t_data *d)
 {
 	// if (is_cmd(cmd))
 	// 	exec_simple(cmd);
@@ -56,19 +56,22 @@ static void	one_simple_b(t_cmd *cmd, t_data *d)
 		if (ft_strcmp(cmd->c_list->val, "exit") == 0)
 		{
 			d->ex = 2;
-			return ;
+			return (1);
 		}
 		if (ft_strcmp(cmd->c_list->val, "env") == 0)
 		{
 			env(d);
-			return ;
+			return (1);
 		}
 		if (ft_strcmp(cmd->c_list->val, "pwd") == 0)
 		{
 			pwd(d);
-			return ;
+			return (1);
 		}
+		// я вот сюда предлагаю пихнуть штуку которая ищет не билтины которые в 1 лист помещаются
+		//и вызывает их надеюсь идея понятна
 	}
+	return (0);
 }
 
 void	ft_parser(char *s, t_data *d, t_cmd *cmd)
