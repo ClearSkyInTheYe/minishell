@@ -81,6 +81,7 @@ void	ft_parser(char *s, t_data *d, t_cmd *cmd)
 	if (s[0] == 0)
 		return ;
 	parse_cmd(cmd);//продумать порядок парсера
+//	qparse_cmd(cmd);
 	one_simple_b(cmd, d);
 //	if (ft_strcmp(s, "exit\n") == 0)
 //	{

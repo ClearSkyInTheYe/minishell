@@ -42,6 +42,46 @@ int	parse_cmd(t_cmd *cmd)
 	// free(arr);//каждый элемент масива возможно стоит фришить но тогда в листы пихать малоченые строки
 	return (0);
 }
+
+int	toklen(char *s, int i)
+{
+	int	l;
+
+	l = 0;
+//	printf("%i\n", i);
+	while ((s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= 'a'
+			&& s[i] <= 'z'))
+	{
+		i++;
+		l++;
+	}
+	//напихать сюда подобных циклов на нужные нам символы
+	return (l);
+}
+
+int	qparse_cmd(t_cmd *cmd)
+{
+	int		x;
+	int		i;
+	int		ch;
+	char	*s;
+
+	i = 0;
+	ch = 0;
+	while (cmd->str[i] == ' ' || cmd->str[i] == '\t')
+		i++;
+	cmd->c_list = new_list("aq", 0);
+	while (ch <= ft_strlen(cmd->str))
+	{
+		ch = toklen(cmd->str, i) - 1;
+		s = ft_substr(cmd->str, i, ch);
+		add_list(cmd->c_list, new_list(s, ch));
+		i = i + toklen(cmd->str, i);
+//		printf("%i\n", ch);
+	}
+	return (0);
+}
+
 //////////////////////////////////////////////////////////////////
 //int	parse_cmd(t_cmd *cmd)
 //{

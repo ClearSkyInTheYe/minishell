@@ -20,7 +20,7 @@ HEADER = minishell.h
 
 OBJS		=	$(SRCS:.c=.o)
 
-CC = gcc
+CC = gcc -g -fsanitize=address
 # CFLAGS = -Wall -Wextra -Werror
 # -g -fsanitize=address
 RLFLAGS = -lreadline -L ~/.brew/opt/readline/lib

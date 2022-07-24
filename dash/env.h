@@ -44,6 +44,7 @@ int		execute_simple_cmd(t_cmd *cmd, char **envp);
 
 //parse.c
 int		parse_cmd(t_cmd *cmd);
+int		qparse_cmd(t_cmd *cmd);
 int		is_pipe(t_cmd *cmd);
 int		is_cmd(t_cmd *cmd);
 void	exec_simple(t_cmd *cmd);
